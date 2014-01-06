@@ -60,10 +60,6 @@ namespace Medlemsregister
             }
         }
 
-        public Member()
-        {
-        }
-
         public Member(string firstName, string lastName, string phoneNumber)
         {
             FirstName = firstName;
