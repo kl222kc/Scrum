@@ -54,7 +54,7 @@ namespace Medlemsregister
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Efternamnet är felaktigt");
+                    throw new ArgumentException("Telefonnumret är felaktigt");
                 }
                 _phoneNumber = value;
             }

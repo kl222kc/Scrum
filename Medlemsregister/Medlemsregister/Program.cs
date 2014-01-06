@@ -24,7 +24,7 @@ namespace Medlemsregister
 
                     case 1:
                         RegisterRepository rr = new RegisterRepository("register.txt");
-                        rr.Load();
+                        rr.Load(member);
                         break;
 
                     case 2:
@@ -44,7 +44,8 @@ namespace Medlemsregister
                         break;
 
                     case 6:
-                        Console.WriteLine("Not Yet Implemented");
+                        //Console.WriteLine("Not Yet Implemented");
+                        MemberView(member);
                         break;
 
                     case 7:
@@ -106,6 +107,12 @@ namespace Medlemsregister
                 ContinueOnKeyPressed();
 
             } while (true);
+        }
+
+        private static void MemberView(List<Member> member)
+        {
+            ViewMember viewMember = new ViewMember();
+            viewMember.Render(member);
         }
 
     }

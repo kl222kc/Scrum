@@ -31,12 +31,10 @@ namespace Medlemsregister
 
         }
 
-        public List<Member> Load()
+        public List<Member> Load(List<Member> register)
         {
 
             RegisterReadStatus status = RegisterReadStatus.Indefinite;
-
-            List<Member> register = new List<Member>();
 
             using (StreamReader reader = new StreamReader(Path))
             {
