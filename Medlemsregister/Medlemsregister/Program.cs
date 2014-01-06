@@ -12,6 +12,7 @@ namespace Medlemsregister
         {
 
             bool exit = false;
+            List<Member> member = new List<Member>();
 
             do
             {
@@ -22,7 +23,18 @@ namespace Medlemsregister
                         continue;
 
                     case 1:
-                        Console.WriteLine("Not Yet Implemented");
+                        //Console.WriteLine("Not Yet Implemented");
+                        Member test = new Member();
+                        test.FirstName = "Kim";
+                        test.LastName = "Larsson";
+                        test.PhoneNumber = "07091212";
+
+                        member.Add(test);
+
+                        Console.WriteLine(member[0]);
+                        Console.WriteLine(member[0].FirstName);
+                        Console.WriteLine(member[0].LastName);
+                        Console.WriteLine(member[0].PhoneNumber);
                         break;
 
                     case 2:
