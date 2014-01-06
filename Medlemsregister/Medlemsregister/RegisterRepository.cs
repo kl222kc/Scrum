@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Medlemsregister
 {
 
-    enum RegisterReadStatus { Indefinite, Name, PhoneNumber };
+    enum RegisterReadStatus { Indefinite, New };
 
     class RegisterRepository
     {
@@ -49,9 +49,9 @@ namespace Medlemsregister
                     {
                         continue;
                     }
-                    if (line == "[Name]")
+                    if (line == "[Member]")
                     {
-                        status = RegisterReadStatus.Name;
+                        status = RegisterReadStatus.New;
                     }
                     else
                     {
@@ -59,7 +59,7 @@ namespace Medlemsregister
                         switch (status)
                         {
 
-                            case RegisterReadStatus.Name:
+                            case RegisterReadStatus.New:
                                 string[] text = line.Split(';');
                                 if (text.Length != 3)
                                 {

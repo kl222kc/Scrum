@@ -1,4 +1,4 @@
-[Name]
+[Member]
 Kim;Larsson;070813656
-[Name]
+[Member]
 Kalle;Warsson;072356
