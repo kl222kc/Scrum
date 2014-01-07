@@ -44,12 +44,11 @@ namespace Medlemsregister
                         break;
 
                     case 6:
-                        //Console.WriteLine("Not Yet Implemented");
-                        MemberView(member);
+                        MemberView(member, true);
                         break;
 
                     case 7:
-                        Console.WriteLine("Not Yet Implemented");
+                        MemberView(member, false);
                         break;
 
                 }
@@ -109,10 +108,75 @@ namespace Medlemsregister
             } while (true);
         }
 
-        private static void MemberView(List<Member> member)
+        private static Member GetMember(string header, List<Member> member)
+        {
+            int index = 0;
+            Member chosenMember;
+
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n------------------------------");
+            Console.WriteLine(header);
+            Console.WriteLine("------------------------------");
+            Console.ResetColor();
+            Console.WriteLine("\n Arkiv -----------------------------------\n");
+            Console.WriteLine(" 0. Avsluta.");
+            Console.WriteLine("\n Medlemmar --------------------------------\n");
+
+            for (int i = 0; i < member.Count; i++)
+            {
+                index++;
+                string name = member[i].FirstName + " " + member[i].LastName;
+                Console.WriteLine(" {0}. {1}", index, name);
+            }
+
+            do
+            {
+                Console.Write("\n Välj Medlem [1-{0}]: ", member.Count);
+                if (int.TryParse(Console.ReadLine(), out index) && index >= 0 && index <= member.Count)
+                {
+                    if (index == 0)
+                    {
+                        chosenMember = null;
+                        return chosenMember;
+                    }
+                    else
+                    {
+                        chosenMember = member[index - 1];
+                        return chosenMember;
+                    }
+
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(" FEL! välj nått av meny alternativen");
+                    Console.ResetColor();
+                }
+            } while (true);
+
+        }
+
+        private static void MemberView(List<Member> member, bool viewAll = false)
         {
             ViewMember viewMember = new ViewMember();
-            viewMember.Render(member);
+            Member chosenMember;
+            string header = "Välj Medlem Att Visa";
+
+            if (viewAll == true)
+            {
+                viewMember.Render(member);
+            }
+            else 
+            {
+                chosenMember = GetMember(header, member);
+                if (chosenMember != null)
+                {
+                    viewMember.Render(chosenMember);
+                }
+            }
         }
 
     }
