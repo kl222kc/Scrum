@@ -83,6 +83,18 @@ namespace Medlemsregister
 
         }
 
+        public void Save(List<Member> register)
+        {
+            using (StreamWriter writer = new StreamWriter(Path))
+            {
+                foreach (Member member in register)
+                {
+                    writer.WriteLine("[Member]");
+                    writer.WriteLine(member.FirstName + ";" + member.LastName + ";" + member.PhoneNumber);
+                }
+            }
+        }
+
         public RegisterRepository(string path)
         {
             Path = path;

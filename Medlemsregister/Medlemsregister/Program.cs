@@ -28,7 +28,8 @@ namespace Medlemsregister
                         break;
 
                     case 2:
-                        Console.WriteLine("Not Yet Implemented");
+                        RegisterRepository rrs = new RegisterRepository("register.txt");
+                        rrs.Save(members);
                         break;
 
                     case 3:
@@ -70,9 +71,9 @@ namespace Medlemsregister
             Console.Write("Skriv in telefon nummer: ");
             phoneNumber = Console.ReadLine();
 
-            Member newmember = new Member(firstName, lastName, phoneNumber);
+            Member member = new Member(firstName, lastName, phoneNumber);
 
-            members.Add(newmember);
+            members.Add(member);
 
         }
 
