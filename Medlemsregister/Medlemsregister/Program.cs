@@ -60,15 +60,23 @@ namespace Medlemsregister
 
         private static void AddMember(List<Member> members)
         {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(" ╔═══════════════════════════════════╗ ");
+            Console.WriteLine(" ║         Lägg till medlem          ║ ");
+            Console.WriteLine(" ╚═══════════════════════════════════╝ ");
+            Console.BackgroundColor = ConsoleColor.Black;
+
             string firstName;
             string lastName;
             string phoneNumber;
 
-            Console.Write("Skriv in förnamn: ");
+            Console.Write("\n Skriv in förnamn: ");
             firstName = Console.ReadLine();
-            Console.Write("Skriv in efternamn: ");
+            Console.Write(" Skriv in efternamn: ");
             lastName = Console.ReadLine();
-            Console.Write("Skriv in telefon nummer: ");
+            Console.Write(" Skriv in telefon nummer: ");
             phoneNumber = Console.ReadLine();
 
             Member member = new Member(firstName, lastName, phoneNumber);
@@ -113,14 +121,14 @@ namespace Medlemsregister
 
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.Write("\nVill du verkligen ta bort '{0}' [J/N]: ", chosenRecipe.FirstName + " " + chosenRecipe.LastName + " från registret");
+                Console.Write("\n  Vill du verkligen ta bort '{0}' [J/N]: ", chosenRecipe.FirstName + " " + chosenRecipe.LastName + " från registret");
                 Console.ResetColor();
                 ConsoleKeyInfo info = Console.ReadKey();
                 if (info.KeyChar == 'j')
                 {
                     Console.BackgroundColor = ConsoleColor.Green;
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("\n ╔═══════════════════════════════════╗ ");
+                    Console.WriteLine("\n\n ╔═══════════════════════════════════╗ ");
                     Console.WriteLine(" ║   Medlemmen har tagits bort       ║ ");
                     Console.WriteLine(" ╚═══════════════════════════════════╝ ");
                     Console.ResetColor();
