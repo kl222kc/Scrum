@@ -12,7 +12,7 @@ namespace Medlemsregister
         {
 
             bool exit = false;
-            List<Member> member = new List<Member>();
+            List<Member> members = new List<Member>();
 
             do
             {
@@ -24,7 +24,7 @@ namespace Medlemsregister
 
                     case 1:
                         RegisterRepository rr = new RegisterRepository("register.txt");
-                        rr.Load(member);
+                        rr.Load(members);
                         break;
 
                     case 2:
@@ -32,7 +32,7 @@ namespace Medlemsregister
                         break;
 
                     case 3:
-                        Console.WriteLine("Not Yet Implemented");
+                        AddMember(members);
                         break;
 
                     case 4:
@@ -40,21 +40,40 @@ namespace Medlemsregister
                         break;
 
                     case 5:
-                        DeleteMember(member);
+                        DeleteMember(members);
                         break;
 
                     case 6:
-                        MemberView(member, true);
+                        MemberView(members, true);
                         break;
 
                     case 7:
-                        MemberView(member, false);
+                        MemberView(members, false);
                         break;
 
                 }
 
                 ContinueOnKeyPressed();
             } while (!exit);
+        }
+
+        private static void AddMember(List<Member> members)
+        {
+            string firstName;
+            string lastName;
+            string phoneNumber;
+
+            Console.Write("Skriv in förnamn: ");
+            firstName = Console.ReadLine();
+            Console.Write("Skriv in efternamn: ");
+            lastName = Console.ReadLine();
+            Console.Write("Skriv in telefon nummer: ");
+            phoneNumber = Console.ReadLine();
+
+            Member newmember = new Member(firstName, lastName, phoneNumber);
+
+            members.Add(newmember);
+
         }
 
         private static void ContinueOnKeyPressed()
@@ -67,11 +86,11 @@ namespace Medlemsregister
             Console.Clear();
         }
 
-        private static void DeleteMember(List<Member> member)
+        private static void DeleteMember(List<Member> members)
         {
             do
             {
-                if (member.Count == 0)
+                if (members.Count == 0)
                 {
                     Console.Clear();
                     Console.BackgroundColor = ConsoleColor.Yellow;
@@ -84,7 +103,7 @@ namespace Medlemsregister
                 }
 
                 string header = "TA BORT MEDLEM!";
-                Member chosenRecipe = GetMember(header, member);
+                Member chosenRecipe = GetMember(header, members);
 
                 if (chosenRecipe == null)
                 {
@@ -104,7 +123,7 @@ namespace Medlemsregister
                     Console.WriteLine(" ║   Medlemmen har tagits bort       ║ ");
                     Console.WriteLine(" ╚═══════════════════════════════════╝ ");
                     Console.ResetColor();
-                    member.Remove(chosenRecipe);
+                    members.Remove(chosenRecipe);
                     ContinueOnKeyPressed();
                 }
                 else if (info.KeyChar == 'n')
@@ -156,7 +175,7 @@ namespace Medlemsregister
             } while (true);
         }
 
-        private static Member GetMember(string header, List<Member> member)
+        private static Member GetMember(string header, List<Member> members)
         {
             int index = 0;
             Member chosenMember;
@@ -172,17 +191,17 @@ namespace Medlemsregister
             Console.WriteLine(" 0. Avsluta.");
             Console.WriteLine("\n Medlemmar --------------------------------\n");
 
-            for (int i = 0; i < member.Count; i++)
+            for (int i = 0; i < members.Count; i++)
             {
                 index++;
-                string name = member[i].FirstName + " " + member[i].LastName;
+                string name = members[i].FirstName + " " + members[i].LastName;
                 Console.WriteLine(" {0}. {1}", index, name);
             }
 
             do
             {
-                Console.Write("\n Välj Medlem [1-{0}]: ", member.Count);
-                if (int.TryParse(Console.ReadLine(), out index) && index >= 0 && index <= member.Count)
+                Console.Write("\n Välj Medlem [1-{0}]: ", members.Count);
+                if (int.TryParse(Console.ReadLine(), out index) && index >= 0 && index <= members.Count)
                 {
                     if (index == 0)
                     {
@@ -191,7 +210,7 @@ namespace Medlemsregister
                     }
                     else
                     {
-                        chosenMember = member[index - 1];
+                        chosenMember = members[index - 1];
                         return chosenMember;
                     }
 
@@ -207,7 +226,7 @@ namespace Medlemsregister
 
         }
 
-        private static void MemberView(List<Member> member, bool viewAll = false)
+        private static void MemberView(List<Member> members, bool viewAll = false)
         {
             ViewMember viewMember = new ViewMember();
             Member chosenMember;
@@ -215,11 +234,11 @@ namespace Medlemsregister
 
             if (viewAll == true)
             {
-                viewMember.Render(member);
+                viewMember.Render(members);
             }
             else 
             {
-                chosenMember = GetMember(header, member);
+                chosenMember = GetMember(header, members);
                 if (chosenMember != null)
                 {
                     viewMember.Render(chosenMember);
