@@ -40,7 +40,7 @@ namespace Medlemsregister
                         break;
 
                     case 5:
-                        Console.WriteLine("Not Yet Implemented");
+                        DeleteMember(member);
                         break;
 
                     case 6:
@@ -65,6 +65,54 @@ namespace Medlemsregister
             Console.ResetColor();
             Console.ReadKey(true);
             Console.Clear();
+        }
+
+        private static void DeleteMember(List<Member> member)
+        {
+            do
+            {
+                if (member.Count == 0)
+                {
+                    Console.Clear();
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine(" ╔══════════════════════════════════════╗ ");
+                    Console.WriteLine(" ║ Det finns inga medelmmar att ta bort ║ ");
+                    Console.WriteLine(" ╚══════════════════════════════════════╝ ");
+                    Console.ResetColor();
+                    break;
+                }
+
+                string header = "TA BORT MEDLEM!";
+                Member chosenRecipe = GetMember(header, member);
+
+                if (chosenRecipe == null)
+                {
+                    break;
+                }
+
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Write("\nVill du verkligen ta bort '{0}' [J/N]: ", chosenRecipe.FirstName + " " + chosenRecipe.LastName + " från registret");
+                Console.ResetColor();
+                ConsoleKeyInfo info = Console.ReadKey();
+                if (info.KeyChar == 'j')
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\n ╔═══════════════════════════════════╗ ");
+                    Console.WriteLine(" ║   Medlemmen har tagits bort       ║ ");
+                    Console.WriteLine(" ╚═══════════════════════════════════╝ ");
+                    Console.ResetColor();
+                    member.Remove(chosenRecipe);
+                    ContinueOnKeyPressed();
+                }
+                else if (info.KeyChar == 'n')
+                {
+                    ContinueOnKeyPressed();
+                }
+
+            } while (true);
         }
 
         private static int GetMenuChoice()
