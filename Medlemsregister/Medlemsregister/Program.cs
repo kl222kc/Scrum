@@ -37,7 +37,7 @@ namespace Medlemsregister
                         break;
 
                     case 4:
-                        Console.WriteLine("Not Yet Implemented");
+                        EditMember(members);
                         break;
 
                     case 5:
@@ -112,16 +112,16 @@ namespace Medlemsregister
                 }
 
                 string header = "TA BORT MEDLEM!";
-                Member chosenRecipe = GetMember(header, members);
+                Member chosenMember = GetMember(header, members);
 
-                if (chosenRecipe == null)
+                if (chosenMember == null)
                 {
                     break;
                 }
 
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.Write("\n  Vill du verkligen ta bort '{0}' [J/N]: ", chosenRecipe.FirstName + " " + chosenRecipe.LastName + " från registret");
+                Console.Write("\n  Vill du verkligen ta bort '{0}' [J/N]: ", chosenMember.FirstName + " " + chosenMember.LastName + " från registret");
                 Console.ResetColor();
                 ConsoleKeyInfo info = Console.ReadKey();
                 if (info.KeyChar == 'j')
@@ -132,7 +132,7 @@ namespace Medlemsregister
                     Console.WriteLine(" ║   Medlemmen har tagits bort       ║ ");
                     Console.WriteLine(" ╚═══════════════════════════════════╝ ");
                     Console.ResetColor();
-                    members.Remove(chosenRecipe);
+                    members.Remove(chosenMember);
                     ContinueOnKeyPressed();
                 }
                 else if (info.KeyChar == 'n')
@@ -141,6 +141,29 @@ namespace Medlemsregister
                 }
 
             } while (true);
+        }
+
+        private static void EditMember(List<Member> members)
+        {
+                if (members.Count == 0)
+                {
+                    Console.Clear();
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine(" ╔══════════════════════════════════════╗ ");
+                    Console.WriteLine(" ║  Det finns inga medelmmar att ändra  ║ ");
+                    Console.WriteLine(" ╚══════════════════════════════════════╝ ");
+                    Console.ResetColor();
+                }
+
+                string header = "ÄNDRA MEDLEM!";
+                Member chosenMember = GetMember(header, members);
+
+               ViewMember viewMember = new ViewMember();
+               viewMember.Render(chosenMember);
+                
+                
+
         }
 
         private static int GetMenuChoice()
