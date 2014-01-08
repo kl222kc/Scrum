@@ -12,7 +12,7 @@ namespace Medlemsregister
         {
 
             bool exit = false;
-            List<Member> members = new List<Member>();
+            List<Member> members = new List<Member>(10);
 
             do
             {
@@ -159,29 +159,32 @@ namespace Medlemsregister
                 string header = "ÄNDRA MEDLEM!";
                 Member chosenMember = GetMember(header, members);
 
-               ViewMember viewMember = new ViewMember();
-               viewMember.Render(chosenMember);
-                
-               Console.BackgroundColor = ConsoleColor.Yellow;
-               Console.ForegroundColor = ConsoleColor.Black;
-               Console.Write("\n  Vill du verkligen ändra '{0}' [J/N]: ", chosenMember.FirstName + " " + chosenMember.LastName);
-               Console.ResetColor();
-               ConsoleKeyInfo info = Console.ReadKey();
-               if (info.KeyChar == 'j')
-               {
-                   Console.Write("\n\nFörnamn: ");
-                   chosenMember.FirstName = Console.ReadLine();
-                   Console.Write("Efternamn: ");
-                   chosenMember.LastName = Console.ReadLine();
-                   Console.Write("Telefon nummer: ");
-                   chosenMember.PhoneNumber = Console.ReadLine();
-               }
-               else if (info.KeyChar == 'n')
-               {
-                   ContinueOnKeyPressed();
-               }
 
-               
+                if (chosenMember != null)
+                {
+                    ViewMember viewMember = new ViewMember();
+                    int index = members.IndexOf(chosenMember);
+                    viewMember.Render(chosenMember, index);
+
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write("\n  Vill du verkligen ändra '{0}' [J/N]: ", chosenMember.FirstName + " " + chosenMember.LastName);
+                    Console.ResetColor();
+                    ConsoleKeyInfo info = Console.ReadKey();
+                    if (info.KeyChar == 'j')
+                    {
+                        Console.Write("\n\nFörnamn: ");
+                        chosenMember.FirstName = Console.ReadLine();
+                        Console.Write("Efternamn: ");
+                        chosenMember.LastName = Console.ReadLine();
+                        Console.Write("Telefon nummer: ");
+                        chosenMember.PhoneNumber = Console.ReadLine();
+                    }
+                    else if (info.KeyChar == 'n')
+                    {
+                        ContinueOnKeyPressed();
+                    } 
+                }
 
         }
 
@@ -292,7 +295,8 @@ namespace Medlemsregister
                 chosenMember = GetMember(header, members);
                 if (chosenMember != null)
                 {
-                    viewMember.Render(chosenMember);
+                    int index = members.IndexOf(chosenMember);
+                    viewMember.Render(chosenMember, index);
                 }
             }
         }

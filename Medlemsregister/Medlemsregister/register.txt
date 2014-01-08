@@ -2,5 +2,3 @@
 Kim;Larsson;070813656
 [Member]
 Kalle;Karlsson;072356
-[Member]
-Lars;Hansson;058912334
