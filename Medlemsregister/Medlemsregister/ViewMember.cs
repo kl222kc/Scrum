@@ -21,6 +21,7 @@ namespace Medlemsregister
             Console.WriteLine(member.FirstName);
             Console.WriteLine(member.LastName);
             Console.WriteLine(member.PhoneNumber);
+            
         }
     }
 }

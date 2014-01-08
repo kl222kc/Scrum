@@ -162,7 +162,26 @@ namespace Medlemsregister
                ViewMember viewMember = new ViewMember();
                viewMember.Render(chosenMember);
                 
-                
+               Console.BackgroundColor = ConsoleColor.Yellow;
+               Console.ForegroundColor = ConsoleColor.Black;
+               Console.Write("\n  Vill du verkligen ändra '{0}' [J/N]: ", chosenMember.FirstName + " " + chosenMember.LastName);
+               Console.ResetColor();
+               ConsoleKeyInfo info = Console.ReadKey();
+               if (info.KeyChar == 'j')
+               {
+                   Console.Write("\n\nFörnamn: ");
+                   chosenMember.FirstName = Console.ReadLine();
+                   Console.Write("Efternamn: ");
+                   chosenMember.LastName = Console.ReadLine();
+                   Console.Write("Telefon nummer: ");
+                   chosenMember.PhoneNumber = Console.ReadLine();
+               }
+               else if (info.KeyChar == 'n')
+               {
+                   ContinueOnKeyPressed();
+               }
+
+               
 
         }
 
