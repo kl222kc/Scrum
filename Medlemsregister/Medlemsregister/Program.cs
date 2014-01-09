@@ -13,6 +13,8 @@ namespace Medlemsregister
 
             bool exit = false;
             List<Member> members = new List<Member>(10);
+            RegisterRepository rr = new RegisterRepository("register.txt");
+            rr.Load(members);
 
             do
             {
@@ -23,32 +25,25 @@ namespace Medlemsregister
                         continue;
 
                     case 1:
-                        RegisterRepository rr = new RegisterRepository("register.txt");
-                        rr.Load(members);
+                        AddMember(members);
+                        rr.Save(members);
                         break;
 
                     case 2:
-                        RegisterRepository rrs = new RegisterRepository("register.txt");
-                        rrs.Save(members);
+                        EditMember(members);
+                        rr.Save(members);
                         break;
 
                     case 3:
-                        AddMember(members);
+                        DeleteMember(members);
+                        rr.Save(members);
                         break;
 
                     case 4:
-                        EditMember(members);
-                        break;
-
-                    case 5:
-                        DeleteMember(members);
-                        break;
-
-                    case 6:
                         MemberView(members, true);
                         break;
 
-                    case 7:
+                    case 5:
                         MemberView(members, false);
                         break;
 
@@ -229,27 +224,25 @@ namespace Medlemsregister
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.WriteLine("\n - Arkiv -----------------------------------\n");
                 Console.WriteLine(" 0. Avsluta.");
-                Console.WriteLine(" 1. Ladda medlemsregister.");
-                Console.WriteLine(" 2. Spara medlemsregister.");
                 Console.WriteLine("\n - Redigera --------------------------------\n");
-                Console.WriteLine(" 3. Lägg till medlem.");
-                Console.WriteLine(" 4. Ändra medlem.");
-                Console.WriteLine(" 5. Ta bort medlem.");
+                Console.WriteLine(" 1. Lägg till medlem.");
+                Console.WriteLine(" 2. Ändra medlem.");
+                Console.WriteLine(" 3. Ta bort medlem.");
                 Console.WriteLine("\n - Visa ------------------------------------\n");
-                Console.WriteLine(" 6. Visa alla medlemmar.");
-                Console.WriteLine(" 7. Visa specifik medlem.");
+                Console.WriteLine(" 4. Visa alla medlemmar.");
+                Console.WriteLine(" 5. Visa specifik medlem.");
                 Console.WriteLine("\n ═══════════════════════════════════════════\n");
-                Console.Write(" Ange menyval [0-7]: ");
+                Console.Write(" Ange menyval [0-5]: ");
                 Console.ResetColor();
 
-                if (int.TryParse(Console.ReadLine(), out index) && index >= 0 && index <= 7)
+                if (int.TryParse(Console.ReadLine(), out index) && index >= 0 && index <= 5)
                 {
                     return index;
                 }
 
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\n FEL! Ange ett nummer mellan 0 och 7.\n");
+                Console.WriteLine("\n FEL! Ange ett nummer mellan 0 och 5.\n");
                 ContinueOnKeyPressed();
 
             } while (true);
@@ -299,7 +292,7 @@ namespace Medlemsregister
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine(" FEL! välj nått av meny alternativen");
+                    Console.WriteLine("\n FEL! välj nått av meny alternativen");
                     Console.ResetColor();
                 }
             } while (true);
