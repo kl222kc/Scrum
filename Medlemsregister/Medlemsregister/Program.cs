@@ -92,9 +92,22 @@ namespace Medlemsregister
  
             }
 
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("\n  Vill du lägga till denna medlem i registret [J/N]");
+            Console.ResetColor();
+            ConsoleKeyInfo info = Console.ReadKey();
+            if (info.KeyChar == 'j')
+            {
             Member member = new Member(id, firstName, lastName, phoneNumber);
-
             members.Add(member);
+            }
+            else 
+            {
+                ContinueOnKeyPressed();
+            }
+
+            
 
         }
 

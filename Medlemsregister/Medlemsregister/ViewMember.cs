@@ -18,6 +18,7 @@ namespace Medlemsregister
 
         public void Render(Member member)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\n Medlemsnummer {0}",member.Id );
             Console.WriteLine(" Namn: {0}", member.FirstName + " " + member.LastName + " ");
             Console.WriteLine(" Telefon nummer: {0}", member.PhoneNumber);
