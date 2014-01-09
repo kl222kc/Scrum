@@ -59,13 +59,14 @@ namespace Medlemsregister
 
                             case RegisterReadStatus.New:
                                 string[] text = line.Split(';');
-                                if (text.Length != 3)
+                                if (text.Length != 4)
                                 {
                                     throw new ArgumentException();
                                 }
                                 else
                                 {
-                                    Member member = new Member(text[0], text[1], text[2]);
+                                    int id = Int32.Parse(text[0]);
+                                    Member member = new Member(id, text[1], text[2], text[3]);
                                     register.Add(member);
                                 }
                                 break;
@@ -90,7 +91,7 @@ namespace Medlemsregister
                 foreach (Member member in register)
                 {
                     writer.WriteLine("[Member]");
-                    writer.WriteLine(member.FirstName + ";" + member.LastName + ";" + member.PhoneNumber);
+                    writer.WriteLine(member.Id + ";" + member.FirstName + ";" + member.LastName + ";" + member.PhoneNumber);
                 }
             }
         }

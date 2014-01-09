@@ -79,7 +79,20 @@ namespace Medlemsregister
             Console.Write(" Skriv in telefon nummer: ");
             phoneNumber = Console.ReadLine();
 
-            Member member = new Member(firstName, lastName, phoneNumber);
+            int id = 0;
+            int maxId = members.Max(element => element.Id) + 2;
+
+            for (int i = 0; i < maxId; i++)
+            {
+                if (!members.Exists(element => element.Id == i) && i != 0)
+                {
+                    id = i;
+                    break;
+                }
+ 
+            }
+
+            Member member = new Member(id, firstName, lastName, phoneNumber);
 
             members.Add(member);
 

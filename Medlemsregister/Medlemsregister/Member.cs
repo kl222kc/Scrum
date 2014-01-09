@@ -28,6 +28,12 @@ namespace Medlemsregister
             }
         }
 
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string LastName
         {
             get
@@ -60,9 +66,10 @@ namespace Medlemsregister
             }
         }
 
-        public Member(string firstName, string lastName, string phoneNumber)
+        public Member(int id, string firstName, string lastName, string phoneNumber)
         {
             FirstName = firstName;
+            Id = id;
             LastName = lastName;
             PhoneNumber = phoneNumber;
         }
