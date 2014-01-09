@@ -176,8 +176,8 @@ namespace Medlemsregister
                 if (chosenMember != null)
                 {
                     ViewMember viewMember = new ViewMember();
-                    int index = members.IndexOf(chosenMember);
-                    viewMember.Render(chosenMember, index);
+
+                    viewMember.Render(chosenMember);
 
                     Console.BackgroundColor = ConsoleColor.Yellow;
                     Console.ForegroundColor = ConsoleColor.Black;
@@ -308,8 +308,7 @@ namespace Medlemsregister
                 chosenMember = GetMember(header, members);
                 if (chosenMember != null)
                 {
-                    int index = members.IndexOf(chosenMember);
-                    viewMember.Render(chosenMember, index);
+                    viewMember.Render(chosenMember);
                 }
             }
         }

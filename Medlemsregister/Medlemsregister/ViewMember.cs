@@ -12,14 +12,13 @@ namespace Medlemsregister
         {
             foreach (Member member in register)
             {
-                int index = register.IndexOf(member);
-                Render(member, index);
+                Render(member);
             }
         }
 
-        public void Render(Member member, int index)
+        public void Render(Member member)
         {
-            Console.WriteLine("\n Medlemsnummer {0}", index);
+            Console.WriteLine("\n Medlemsnummer {0}",member.Id );
             Console.WriteLine(" Namn: {0}", member.FirstName + " " + member.LastName + " ");
             Console.WriteLine(" Telefon nummer: {0}", member.PhoneNumber);
         }
