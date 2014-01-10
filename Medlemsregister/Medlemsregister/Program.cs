@@ -12,7 +12,7 @@ namespace Medlemsregister
         {
 
             bool exit = false;
-            List<Member> members = new List<Member>(10);
+            List<Member> members = new List<Member>();
             RegisterRepository rr = new RegisterRepository("register.txt");
             rr.Load(members);
 
@@ -180,7 +180,6 @@ namespace Medlemsregister
                 string header = "ÄNDRA MEDLEM!";
                 Member chosenMember = GetMember(header, members);
 
-
                 if (chosenMember != null)
                 {
                     ViewMember viewMember = new ViewMember();
@@ -191,20 +190,37 @@ namespace Medlemsregister
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.Write("\n  Vill du verkligen ändra '{0}' [J/N]: ", chosenMember.FirstName + " " + chosenMember.LastName);
                     Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.White;
                     ConsoleKeyInfo info = Console.ReadKey();
+                    Console.WriteLine("");
                     if (info.KeyChar == 'j')
                     {
-                        Console.Write("\n\nFörnamn: ");
-                        chosenMember.FirstName = Console.ReadLine();
-                        Console.Write("Efternamn: ");
-                        chosenMember.LastName = Console.ReadLine();
-                        Console.Write("Telefon nummer: ");
-                        chosenMember.PhoneNumber = Console.ReadLine();
+                        Console.Write("\n Förnamn: ");
+                        string firstName = Console.ReadLine();
+                        Console.Write(" Efternamn: ");
+                        string lastName = Console.ReadLine();
+                        Console.Write(" Telefon nummer: ");
+                        string phoneNumber = Console.ReadLine();
+
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.Write("\n  Vill du spara ändringarna? [J/N]");
+                        Console.ResetColor();
+                        Console.ForegroundColor = ConsoleColor.White;
+                        ConsoleKeyInfo info2 = Console.ReadKey();
+                        Console.WriteLine("");
+                        if (info2.KeyChar == 'j')
+                        {
+                            chosenMember.FirstName = firstName;
+                            chosenMember.LastName = lastName;
+                            chosenMember.PhoneNumber = phoneNumber;
+                        }
+                        else if (info.KeyChar == 'n')
+                        {
+                            ContinueOnKeyPressed();
+                        } 
                     }
-                    else if (info.KeyChar == 'n')
-                    {
-                        ContinueOnKeyPressed();
-                    } 
+
                 }
 
         }
@@ -260,6 +276,7 @@ namespace Medlemsregister
             Console.WriteLine(header);
             Console.WriteLine("------------------------------");
             Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\n Arkiv -----------------------------------\n");
             Console.WriteLine(" 0. Avsluta.");
             Console.WriteLine("\n Medlemmar --------------------------------\n");
@@ -293,7 +310,7 @@ namespace Medlemsregister
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\n FEL! välj nått av meny alternativen");
-                    Console.ResetColor();
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
             } while (true);
 
