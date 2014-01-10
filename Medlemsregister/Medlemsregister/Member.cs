@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Medlemsregister
 {
-    class Member
+    class Member : IComparable, IComparable<Member>
     {
         private string _firstName;
         private string _lastName;
@@ -64,6 +64,33 @@ namespace Medlemsregister
                 }
                 _phoneNumber = value;
             }
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            if (obj is Member == false)
+            {
+                throw new ArgumentException();
+            }
+
+            Member otherObj = (Member)obj;
+
+            return Id.CompareTo(otherObj.Id);
+        }
+
+        public int CompareTo(Member other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+
+            return Id.CompareTo(other.Id);
         }
 
         public Member(int id, string firstName, string lastName, string phoneNumber)

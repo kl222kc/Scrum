@@ -80,12 +80,16 @@ namespace Medlemsregister
                 }
             }
 
+            register.Sort();
             return register;
 
         }
 
         public void Save(List<Member> register)
         {
+
+            register.Sort();
+
             using (StreamWriter writer = new StreamWriter(Path))
             {
                 foreach (Member member in register)
